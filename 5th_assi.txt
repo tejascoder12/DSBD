@@ -1,0 +1,97 @@
+5th ASSI
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+df=pd.read_csv("Social_Network_Ads.csv")
+df
+
+
+df.isnull().sum()
+
+
+x=df.drop("Purchased",axis=1)
+x
+
+
+y=df.Purchased
+y
+
+
+from sklearn.model_selection import train_test_split
+xtrain, xtest, ytrain, ytest =train_test_split(x, y, test_size =0.2,random_state = 0
+
+
+from sklearn.preprocessing import StandardScaler
+sc = StandardScaler()
+xtrain = sc.fit_transform(xtrain)
+xtest = sc.transform(xtest)
+#xtest
+
+
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression()
+lr.fit(xtrain, ytrain)
+
+
+
+ytrain_pred = lr.predict(xtrain)
+ytest_pred = lr.predict(xtest)
+
+
+ytrain_pred
+
+ytest_pred
+
+
+print(lr.predict( [[19,19000]]))
+
+lr.predict([[-7.98950822e-01,4.94607583e-01]])
+
+lr.predict([[-2.15686344e-01,2.14601566e+00]])
+
+
+from sklearn.metrics import confusion_matrix,classification_report,accuracy_score
+matrix = confusion_matrix(ytest,ytest_pred)
+print(matrix)
+
+score=accuracy_score(ytest,ytest_pred)
+score
+
+
+cr=classification_report(ytest,ytest_pred)
+print(cr)
+
+import seaborn as sns
+sns.heatmap(matrix,annot=True)
+
+
+tn, fp, fn, tp = confusion_matrix(ytest,ytest_pred).ravel()
+print(tn, fp, fn, tp)
+
+
+print("Error rate: ",(fp+fn)/(tn+fp+fn+tp))
+
+
+print("Recall: ",(tp)/(tp+fn))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
