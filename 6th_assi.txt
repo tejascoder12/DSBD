@@ -1,0 +1,89 @@
+6th ASSI:
+
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+
+
+
+df=pd.read_csv("Iris.csv")
+df
+
+
+
+from sklearn.preprocessing import LabelEncoder
+label_encoder = LabelEncoder()
+df['Species'] =label_encoder.fit_transform(df['Species'])
+df
+
+
+x=df.drop("Species",axis=1)
+x
+
+
+y=df.Species
+y
+
+
+from sklearn.model_selection import train_test_split
+xtrain, xtest, ytrain, ytest =train_test_split(x, y, test_size =0.2,random_state = 0
+
+
+from sklearn.naive_bayes import GaussianNB
+gaussian = GaussianNB()
+gaussian.fit(xtrain,ytrain)
+
+Y_pred = gaussian.predict(xtest)
+
+
+
+from sklearn.metrics import classification_report,accuracy_score,confusion_matrix
+cm=confusion_matrix(ytest,Y_pred)
+print(cm)
+
+
+
+cr=classification_report(ytest,Y_pred)
+print(cr)
+
+
+
+
+acuracy = accuracy_score(ytest,Y_pred)
+accuracy
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
